@@ -15,6 +15,7 @@
 		F5ABEE3423BF531A006AF2D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5ABEE3323BF531A006AF2D7 /* Assets.xcassets */; };
 		F5ABEE3723BF531A006AF2D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5ABEE3523BF531A006AF2D7 /* LaunchScreen.storyboard */; };
 		F5ABEE3F23BF53E4006AF2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5ABEE3E23BF53E4006AF2D7 /* GoogleService-Info.plist */; };
+		F5ABEE4123BF6493006AF2D7 /* EditAndPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ABEE4023BF6493006AF2D7 /* EditAndPostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F5ABEE3623BF531A006AF2D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5ABEE3823BF531A006AF2D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5ABEE3E23BF53E4006AF2D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F5ABEE4023BF6493006AF2D7 /* EditAndPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAndPostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				F5ABEE2C23BF5311006AF2D7 /* SceneDelegate.swift */,
 				F5ABEE2E23BF5311006AF2D7 /* LoginViewController.swift */,
 				F5ABEE3023BF5311006AF2D7 /* Main.storyboard */,
+				F5ABEE4023BF6493006AF2D7 /* EditAndPostViewController.swift */,
 				F5ABEE3323BF531A006AF2D7 /* Assets.xcassets */,
 				F5ABEE3523BF531A006AF2D7 /* LaunchScreen.storyboard */,
 				F5ABEE3823BF531A006AF2D7 /* Info.plist */,
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5ABEE4123BF6493006AF2D7 /* EditAndPostViewController.swift in Sources */,
 				F5ABEE2F23BF5311006AF2D7 /* LoginViewController.swift in Sources */,
 				F5ABEE2B23BF5311006AF2D7 /* AppDelegate.swift in Sources */,
 				F5ABEE2D23BF5311006AF2D7 /* SceneDelegate.swift in Sources */,
