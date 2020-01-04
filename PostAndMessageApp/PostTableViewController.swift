@@ -9,12 +9,22 @@
 import UIKit
 import Photos
 
-class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var timeLineTableView: UITableView!
     
     
     @IBOutlet weak var cameraButton: UIButton!
+    
+    var selectedImage = UIImage()
+    
+    var userName = String()
+    var commentString = String()
+    var creatDate = String()
+    var contentImageString = String()
+    
+    var contentsArray =  [Contents]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +42,18 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
                 print("notDetermined")
             case .restricted:
                 print("restricted")
-                
             }
-            
         }
+        
+        timeLineTableView.delegate = self
+        timeLineTableView.dataSource = self
+        
+        //userNameで何かしらデータが保存されていたのであれば
+        if UserDefaults.standard.object(forKey: "userName") != nil {
+            userName = UserDefaults.standard.object(forKey: "userName") as! String
+        }
+        
+        
     }
     
     
@@ -97,16 +115,17 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
     // 写真が選択された時に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if info[.originalImage] as? UIImage != nil {
-            
-            //compressionQualityを設定することでデータサイズを小さくしている
-            let selectedImage = info[.originalImage] as! UIImage
-            UserDefaults.standard.set(selectedImage.jpegData(compressionQuality: 0.1), forKey: "userImage")
-            
-            //ここはpostImageを入れる。後日修正
-            logoImageView.image = selectedImage
-            picker.dismiss(animated: true, completion: nil)
-        }
+        selectedImage = info[.originalImage] as! UIImage
+        
+        //ナビゲーションを用いて画面遷移
+        let editPostVC = self.storyboard?.instantiateViewController(withIdentifier: "editPost") as! EditAndPostViewController
+        
+        editPostVC.passedImage = selectedImage
+        self.navigationController?.pushViewController(editPostVC, animated: true)
+        
+        //ピッカーを閉じる
+        picker.dismiss(animated: true, completion: nil)
+        
     }
       
     //カメラの画面が閉じる操作
@@ -136,6 +155,52 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
           self.present(alertController, animated: true, completion: nil)
           
       }
+    
+    
+    
+    
+    
+        // MARK: - timeLineTableView
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contentsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = timeLineTableView.dequeueReusableCell(withIdentifier: "timeLineCell", for: indexPath)
+        
+        //コンテンツに受信したものを貼り付けていく
+        //タグは1からスタートすること。配列は0からスタート。
+        
+        //ユーザー名
+        let userNameLabel = cell.viewWithTag(1) as! UILabel
+        userNameLabel.text = contentsArray[indexPath.row].userNameString
+        
+        //投稿日時
+        let dateLabel = cell.viewWithTag(2) as! UILabel
+        dateLabel.text = contentsArray[indexPath.row].postDateString
+        
+        //投稿画像
+        let contentImageView = cell.viewWithTag(3) as! UIImageView
+        contentImageView.sd_setImage(with: URL(string: contentsArray[indexPath.row].postImageString), completed: nil)
+        
+        //コメントラベル
+        let commentLabel = cell.viewWithTag(4) as! UILabel
+        commentLabel.text = contentsArray[indexPath.row].commentString
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 385
+    }
+    
     
     
     
