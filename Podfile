@@ -12,6 +12,7 @@ target 'PostAndMessageApp' do
   pod 'Firebase/Database' 
   pod 'Firebase/Storage'
   pod ‘SDWebImage’
+  pod 'MessageKit'
 
 
 end
