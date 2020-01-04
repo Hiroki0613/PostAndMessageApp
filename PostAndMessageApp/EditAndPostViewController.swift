@@ -20,6 +20,8 @@ class EditAndPostViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var commentTextField: UITextField!
     
+    var ref: DatabaseReference!
+    
     let screenSize = UIScreen.main.bounds.size
     
     
@@ -27,6 +29,8 @@ class EditAndPostViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
         
         commentTextField.delegate = self
         
@@ -102,16 +106,18 @@ class EditAndPostViewController: UIViewController,UITextFieldDelegate {
     }
     
     
+    
+    
     // MARK: - Database,Storage
     @IBAction func postAction(_ sender: Any) {
         
         
         //DBのchildを決めていく。つまり、DatabaseのURLを取得していく
-        let timeLineDB = Database.database().reference().child("timeLine").childByAutoId()
+        let timeLineDB = ref.child("timeLine").childByAutoId()
         
         //ストレージサーバーのURLを取得していく
         //URLの場所はFirebaseのStorageに記載
-        let storage = Storage.storage().reference(forURL: "")
+        let storage = Storage.storage().reference(forURL: "gs://postandmessageapp.appspot.com")
         
         //データを更新、削除するためのパスを作成する。
         //フォルダを作成していく。ここに画像が入っていく。
@@ -135,12 +141,8 @@ class EditAndPostViewController: UIViewController,UITextFieldDelegate {
             postImageData = (postImageView.image?.jpegData(compressionQuality: 0.01))!
         }
         
-        /*
-         メモリ内のデータからアップロードする
-         */
-        //アップロードタスク。デバイスからStorageサーバーに画像を送信
-        //クロージャーはuserProfileImageDataは手動で作成、ccontentImageDataは自動で設定(２パターン用意。基本的に同じコード)
         
+        //アップロードタスク。デバイスからStorageサーバーに画像を送信
         let upLoadTask = imageRef.putData(postImageData, metadata: nil) { (metaData, error) in
             
             if error != nil {
