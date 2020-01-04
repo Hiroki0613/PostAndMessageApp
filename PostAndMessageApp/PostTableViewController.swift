@@ -8,6 +8,8 @@
 
 import UIKit
 import Photos
+import Firebase
+import SDWebImage
 
 class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource {
     
@@ -15,6 +17,8 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
     
     
     @IBOutlet weak var cameraButton: UIButton!
+    
+    var ref: DatabaseReference!
     
     var selectedImage = UIImage()
     
@@ -28,6 +32,8 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
         
         //ユーザーに画像ライブラリーの許可を促す。
         PHPhotoLibrary.requestAuthorization { (status) in
@@ -115,6 +121,7 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
         let editPostVC = self.storyboard?.instantiateViewController(withIdentifier: "editPost") as! EditAndPostViewController
         
         editPostVC.passedImage = selectedImage
+        editPostVC.userName = userName
         self.navigationController?.pushViewController(editPostVC, animated: true)
         
         //ピッカーを閉じる
@@ -179,8 +186,8 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
         dateLabel.text = contentsArray[indexPath.row].postDateString
         
         //投稿画像
-        let contentImageView = cell.viewWithTag(3) as! UIImageView
-        contentImageView.sd_setImage(with: URL(string: contentsArray[indexPath.row].postImageString), completed: nil)
+        let postImageView = cell.viewWithTag(3) as! UIImageView
+        postImageView.sd_setImage(with: URL(string: contentsArray[indexPath.row].postImageString), completed: nil)
         
         //コメントラベル
         let commentLabel = cell.viewWithTag(4) as! UILabel
@@ -195,8 +202,62 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
         return 385
     }
     
+    //FirebaseDatabaseに蓄積されているデータを取得する
+    func fetchContentsData(){
+        
+         //queryLimited toLast に100を入れることで、最新100件を取得
+        //queryOrderdでpostDateにすることで、postDateの順番に取得
+        let fetchRef = ref.child("timeLine").queryLimited(toLast: 100).queryOrdered(byChild: "postDate").observe(.value) { (snapShot) in
+            
+            //contentsArrayに入っているものを空にして、fetcRefで取得したものをAppendしていく
+            self.contentsArray.removeAll()
+            
+            if let snapShot = snapShot.children.allObjects as? [DataSnapshot] {
+                for snap in snapShot {
+                    if let postData = snap.value as? [String:Any] {
+                        let userName = postData["userName"] as? String
+                        let contents = postData["contens"] as? String
+                        let comment = postData["comment"] as? String
+                        
+                        var postDate:CLong?
+                        
+                        if let postedDate = postData["postDate"] as? CLong{
+                            postDate = postedDate
+                        }
+                        
+                        //postDateを時間に変換
+                        let timeString = self.convertTimeStamp(serverTimeStamp: postDate!)
+                        
+                        self.contentsArray.append(Contents(userNameString: userName!, postImageString: contents!, commentString: comment!, postDateString: timeString))
+                        
+                    }
+                }
+                self.timeLineTableView.reloadData()
+                
+
+                let indexPath = IndexPath(row: self.contentsArray.count - 1, section: 0)
+                
+                if self.contentsArray.count >= 5 {
+
+                    //タイムラインを一番下まで自動スクロール
+                    self.timeLineTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
+            }
+        }
+    }
     
     
+    func convertTimeStamp(serverTimeStamp: CLong) -> String{
+           
+           let x = serverTimeStamp / 1000
+           let date = Date(timeIntervalSince1970: TimeInterval(x))
+           let formatter = DateFormatter()
+           formatter.dateStyle = .long
+           formatter.timeStyle = .medium
+           
+           return formatter.string(from: date)
+       }
+       
     
     
 }

@@ -41,11 +41,6 @@ class EditAndPostViewController: UIViewController,UITextFieldDelegate {
         //キーボードが閉じる時に、textFieldの高さが可変になるもの。
         NotificationCenter.default.addObserver(self, selector: #selector(EditAndPostViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        //アプリ内に保存されているデータを呼び出して、
-        //パーツに反映していく
-        if UserDefaults.standard.object(forKey: "userName") != nil {
-            userName = UserDefaults.standard.object(forKey: "userName") as! String
-        }
         
         userNameLabel.text = userName
         postImageView.image = passedImage
