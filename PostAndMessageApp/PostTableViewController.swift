@@ -48,12 +48,6 @@ class PostTableViewController: UIViewController,UIImagePickerControllerDelegate,
         timeLineTableView.delegate = self
         timeLineTableView.dataSource = self
         
-        //userNameで何かしらデータが保存されていたのであれば
-        if UserDefaults.standard.object(forKey: "userName") != nil {
-            userName = UserDefaults.standard.object(forKey: "userName") as! String
-        }
-        
-        
     }
     
     

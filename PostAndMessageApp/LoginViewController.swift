@@ -35,9 +35,6 @@ class LoginViewController: UIViewController {
             } else {
                 print("ユーザーの作成が成功しました")
                 
-                
-                //以下の場所は、新規登録が完了後に動かしたいサンプルコードを記載しています
-                
                 //画面をチャット画面に遷移させる
                 self.performSegue(withIdentifier: "goToPostView", sender: nil)
                 
@@ -45,6 +42,16 @@ class LoginViewController: UIViewController {
             
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToPostView"{
+            let postTableVC = segue .destination as! PostTableViewController
+            
+            postTableVC.userName = emailTextField.text!
+        }
+     
     }
     
     
