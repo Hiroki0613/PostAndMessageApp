@@ -64,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="1077.5999999999999" y="118.29085457271366"/>
         </scene>
-        <!--View Controller-->
+        <!--Post Table View Controller-->
         <scene sceneID="QUZ-iY-LGt">
             <objects>
-                <viewController id="GZE-O5-hvy" sceneMemberID="viewController">
+                <viewController id="GZE-O5-hvy" customClass="PostTableViewController" customModule="PostAndMessageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LEI-8j-BEu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,6 +133,10 @@
                         <viewLayoutGuide key="safeArea" id="Oy1-vO-Ywy"/>
                     </view>
                     <navigationItem key="navigationItem" id="YeW-rc-Ahq"/>
+                    <connections>
+                        <outlet property="cameraButton" destination="swI-8w-qNA" id="p6O-Fo-aWN"/>
+                        <outlet property="timeLineTableView" destination="jaI-4U-qAC" id="y1m-0w-Lbb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJ9-h6-Cf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -17,6 +17,7 @@
 		F5ABEE4123BF6493006AF2D7 /* EditAndPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ABEE4023BF6493006AF2D7 /* EditAndPostViewController.swift */; };
 		F5ABEE4323BF7196006AF2D7 /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ABEE4223BF7196006AF2D7 /* Contents.swift */; };
 		F5ABEE4523BF736D006AF2D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5ABEE4423BF736D006AF2D7 /* GoogleService-Info.plist */; };
+		F5ABEE4723C0C978006AF2D7 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ABEE4623C0C978006AF2D7 /* PostTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		F5ABEE4023BF6493006AF2D7 /* EditAndPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAndPostViewController.swift; sourceTree = "<group>"; };
 		F5ABEE4223BF7196006AF2D7 /* Contents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
 		F5ABEE4423BF736D006AF2D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F5ABEE4623C0C978006AF2D7 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				F5ABEE2C23BF5311006AF2D7 /* SceneDelegate.swift */,
 				F5ABEE2E23BF5311006AF2D7 /* LoginViewController.swift */,
 				F5ABEE3023BF5311006AF2D7 /* Main.storyboard */,
+				F5ABEE4623C0C978006AF2D7 /* PostTableViewController.swift */,
 				F5ABEE4023BF6493006AF2D7 /* EditAndPostViewController.swift */,
 				F5ABEE3323BF531A006AF2D7 /* Assets.xcassets */,
 				F5ABEE3523BF531A006AF2D7 /* LaunchScreen.storyboard */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5ABEE4123BF6493006AF2D7 /* EditAndPostViewController.swift in Sources */,
+				F5ABEE4723C0C978006AF2D7 /* PostTableViewController.swift in Sources */,
 				F5ABEE4323BF7196006AF2D7 /* Contents.swift in Sources */,
 				F5ABEE2F23BF5311006AF2D7 /* LoginViewController.swift in Sources */,
 				F5ABEE2B23BF5311006AF2D7 /* AppDelegate.swift in Sources */,
