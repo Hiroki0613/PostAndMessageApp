@@ -85,7 +85,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aeb-fR-NL4">
-                                                    <rect key="frame" x="11" y="67" width="352" height="301"/>
+                                                    <rect key="frame" x="11" y="67" width="352" height="253"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ユーザー名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70E-p9-Ob7">
@@ -99,6 +99,13 @@
                                                     <rect key="frame" x="200" y="11" width="163" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="コメント" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iax-AL-FId">
+                                                    <rect key="frame" x="15" y="328" width="345" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -126,9 +133,6 @@
                         <viewLayoutGuide key="safeArea" id="Oy1-vO-Ywy"/>
                     </view>
                     <navigationItem key="navigationItem" id="YeW-rc-Ahq"/>
-                    <connections>
-                        <segue destination="DxW-LS-eMj" kind="show" id="BXJ-iX-Z42"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJ9-h6-Cf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -152,19 +156,22 @@
             </objects>
             <point key="canvasLocation" x="254" y="117"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit And Post View Controller-->
         <scene sceneID="d2F-pS-Nff">
             <objects>
-                <viewController id="DxW-LS-eMj" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editPost" id="DxW-LS-eMj" customClass="EditAndPostViewController" customModule="PostAndMessageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nky-jP-eSl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ewd-P2-dml">
-                                <rect key="frame" x="213" y="547" width="147" height="100"/>
+                                <rect key="frame" x="252" y="595" width="111" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="投稿"/>
+                                <connections>
+                                    <action selector="postAction:" destination="DxW-LS-eMj" eventType="touchUpInside" id="hVW-W3-PN2"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="画像投稿画面" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uah-uU-hXq">
                                 <rect key="frame" x="0.0" y="44" width="375" height="54"/>
@@ -184,15 +191,27 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="お題を入力" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f0G-9g-XPS">
+                                <rect key="frame" x="16" y="616" width="232" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="N3r-In-OD8"/>
                     </view>
                     <navigationItem key="navigationItem" id="FYt-4Z-Klg"/>
+                    <connections>
+                        <outlet property="commentTextField" destination="f0G-9g-XPS" id="GJk-E6-MMF"/>
+                        <outlet property="postImageView" destination="jtZ-9O-qSF" id="0jL-XL-Acz"/>
+                        <outlet property="sendButton" destination="Ewd-P2-dml" id="PSp-S8-kLc"/>
+                        <outlet property="userNameLabel" destination="oAe-mG-bqA" id="EKd-9b-7ll"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3N-6k-UMp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2698" y="118"/>
+            <point key="canvasLocation" x="2696.8000000000002" y="117.39130434782609"/>
         </scene>
     </scenes>
 </document>
